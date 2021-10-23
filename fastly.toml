@@ -1,0 +1,24 @@
+# This file describes a Fastly Compute@Edge package. To learn more visit:
+# https://developer.fastly.com/reference/fastly-toml/
+
+authors = ["hrmsk66@gmail.com"]
+description = "A basic starter kit that demonstrates routing, simple synthetic responses and overriding caching rules."
+language = "rust"
+manifest_version = 2
+name = "rewrite-html-rust"
+service_id = "0Ex35OBLlVBycRHz54bMkp"
+
+[local_server]
+
+  [local_server.backends]
+
+    [local_server.backends.example_com]
+      url = "https://example.com"
+
+[setup]
+
+  [setup.backends]
+
+    [setup.backends.example_com]
+      address = "example.com"
+      port = 443
