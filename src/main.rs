@@ -1,4 +1,5 @@
-use fastly::http::header;
+// This example Compute@Edge app modifies HTML returned from https://example.com at the edge
+use fastly::http::{header, StatusCode};
 use fastly::{Error, Request, Response};
 use lol_html::{rewrite_str, element, text, RewriteStrSettings};
 use lol_html::html_content::ContentType;
@@ -9,17 +10,17 @@ const STYLE: &str = std::include_str!("style.css");
 
 #[fastly::main]
 fn main(mut req: Request) -> Result<Response, Error> {
-    req.set_path("/");
     // Add the host header so that you don't need to specify it in a request when testing locally
     req.set_header(header::HOST, "example.com");
     // Request an uncompressed response
     req.remove_header(header::ACCEPT_ENCODING);
     let beresp = req.send("example_com")?;
 
-    if let Some("text/html; charset=UTF-8") = beresp.get_header_str(header::CONTENT_TYPE) {
+    if beresp.get_status() == StatusCode::OK {
         println!("Returning a modified version of https://example.com");
         return Ok(rewrite_html(beresp));
     }
+    // For responses other than 200, just return the origin response as is
     Ok(beresp)
 }
 
