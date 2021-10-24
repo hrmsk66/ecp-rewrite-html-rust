@@ -1,6 +1,6 @@
 # Rewrite HTML response at the edge (with Rust SDK)
 
-This example Compute@Edge app is designed to modify the HTML returned from https://example.com on the fly.
+This example Compute@Edge app modifies the HTML returned from https://example.com on the fly.
 - Inserting Google Fonts link tags
 - Replacing CSS in style tags
 - Modifying inner contents of h1 tags
