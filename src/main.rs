@@ -5,8 +5,8 @@ use lol_html::{rewrite_str, element, text, RewriteStrSettings};
 use lol_html::html_content::ContentType;
 
 // Load files into the constants
-const FONT_LINKS: &str = std::include_str!("font.html");
-const STYLE: &str = std::include_str!("style.css");
+const FONT_LINKS: &str = include_str!("font.html");
+const STYLE: &str = include_str!("style.css");
 
 #[fastly::main]
 fn main(mut req: Request) -> Result<Response, Error> {
